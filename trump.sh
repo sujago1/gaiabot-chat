@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # Check if jq is installed, and if not, install it
 if ! command -v jq &> /dev/null; then
     echo "❌ jq not found. Installing jq..."
@@ -14,7 +16,7 @@ fi
 
 # List of general questions
 general_questions=(
-    "oats make me bloated"
+        "oats make me bloated"
     "where is 562 area code"
     "how to make a paper airplane"
     "how to not snore"
@@ -368,17 +370,18 @@ while true; do
 done
 
 # Asking for duration
-echo -n "⏳ How many hours do you want the bot to run? "
-read -r bot_hours
+while true; do
+    echo -n "⏳ How many hours do you want the bot to run? "
+    read -r bot_hours
 
-# Convert hours to seconds
-if [[ "$bot_hours" =~ ^[0-9]+$ ]]; then
-    max_duration=$((bot_hours * 3600))
-    echo "🕒 The bot will run for $bot_hours hour(s) ($max_duration seconds)."
-else
-    echo "⚠️ Invalid input! Please enter a number."
-    exit 1
-fi
+    if [[ "$bot_hours" =~ ^[0-9]+$ ]]; then
+        max_duration=$((bot_hours * 3600))
+        echo "🕒 The bot will run for $bot_hours hour(s) ($max_duration seconds)."
+        break
+    else
+        echo "⚠️ Invalid input! Please enter a positive number."
+    fi
+done
 
 # Hidden API URL (moved to the bottom)
 API_URL="https://trump1.gaia.domains/v1/chat/completions"
@@ -386,11 +389,11 @@ API_URL="https://trump1.gaia.domains/v1/chat/completions"
 # Display thread information
 echo "✅ Using 1 thread..."
 echo "⏳ Waiting 30 seconds before sending the first request..."
-sleep 5
+sleep 30
 
 echo "🚀 Starting requests..."
 start_time=$(date +%s)
-success_count=0  # Initialize success counter
+success_count=3  # Initialize success counter
 
 while true; do
     current_time=$(date +%s)
@@ -404,5 +407,5 @@ while true; do
 
     random_message=$(generate_random_general_question)
     send_request "$random_message" "$api_key"
-    sleep 0
+    sleep 1
 done
