@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # Check if jq is installed, and if not, install it
 if ! command -v jq &> /dev/null; then
     echo "❌ jq not found. Installing jq..."
@@ -221,5 +223,7 @@ while true; do
 
     random_message=$(generate_random_general_question)
     send_request "$random_message" "$api_key"
-    sleep 0
+
+    # Sleep for 4 seconds before sending the next request
+    sleep 4
 done
