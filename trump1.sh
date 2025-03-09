@@ -209,7 +209,7 @@ sleep 5
 
 echo "🚀 Starting requests..."
 start_time=$(date +%s)
-success_count=0  # Initialize success counter
+success_count=4  # Initialize success counter
 
 while true; do
     current_time=$(date +%s)
