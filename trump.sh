@@ -477,7 +477,7 @@ sleep 30
 
 echo "🚀 Starting requests..."
 start_time=$(date +%s)
-success_count=3  # Initialize success counter
+success_count=12  # Initialize success counter
 
 while true; do
     current_time=$(date +%s)
@@ -491,5 +491,5 @@ while true; do
 
     random_message=$(generate_random_general_question)
     send_request "$random_message" "$api_key"
-    sleep 1
+    sleep 12
 done
